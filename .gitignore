@@ -1,0 +1,17 @@
+# Root .gitignore - shared rules
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.env
+.env.local

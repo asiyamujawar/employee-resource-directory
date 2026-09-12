@@ -1,0 +1,303 @@
+{
+  "info": {
+    "name": "GTT Employee Resource Directory API",
+    "description": "Complete CRUD API testing for Employee Resource Directory",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET all employees",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "2. GET employee by valid ID (1)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees", "1"]
+        }
+      }
+    },
+    {
+      "name": "3. GET employee by invalid ID (999)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees/999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees", "999"]
+        }
+      }
+    },
+    {
+      "name": "4. GET employees with search filter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees?search=alice",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"],
+          "query": [
+            {
+              "key": "search",
+              "value": "alice"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. GET employees with department filter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees?department=Engineering",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"],
+          "query": [
+            {
+              "key": "department",
+              "value": "Engineering"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. POST valid new employee",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Employee\",\n  \"email\": \"test.employee@company.com\",\n  \"department\": \"Engineering\",\n  \"role\": \"Developer\",\n  \"manager_id\": 2,\n  \"status\": \"active\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "7. POST missing required field (name)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test2@company.com\",\n  \"department\": \"Engineering\",\n  \"role\": \"Developer\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "8. POST invalid email format",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Invalid Email\",\n  \"email\": \"notanemail\",\n  \"department\": \"Engineering\",\n  \"role\": \"Developer\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "9. POST duplicate email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Alice Duplicate\",\n  \"email\": \"alice.johnson@company.com\",\n  \"department\": \"Engineering\",\n  \"role\": \"Developer\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "10. POST invalid manager_id",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test Invalid Manager\",\n  \"email\": \"test.invalid.mgr@company.com\",\n  \"department\": \"Engineering\",\n  \"role\": \"Developer\",\n  \"manager_id\": 999\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "11. POST employee as own manager (will fail on update)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Self Manager\",\n  \"email\": \"self.manager@company.com\",\n  \"department\": \"Engineering\",\n  \"role\": \"Developer\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees"]
+        }
+      }
+    },
+    {
+      "name": "12. PUT valid employee update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"role\": \"Senior Engineer\",\n  \"status\": \"inactive\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees", "3"]
+        }
+      }
+    },
+    {
+      "name": "13. PUT non-existing employee (404)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"role\": \"Manager\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/employees/999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees", "999"]
+        }
+      }
+    },
+    {
+      "name": "14. DELETE valid employee",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees/5",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees", "5"]
+        }
+      }
+    },
+    {
+      "name": "15. DELETE non-existing employee (404)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/employees/999",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "employees", "999"]
+        }
+      }
+    }
+  ]
+}
