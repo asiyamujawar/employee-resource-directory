@@ -12,6 +12,26 @@ Employee Resource Directory is a full-stack web application for managing employe
 - **API Communication**: Axios
 - **Build Tool**: React Scripts 5.0
 
+## Screenshots
+
+### Dashboard
+![Dashboard](./screenshot/Dashboard.png)
+
+### Search & Filter
+![Search](./screenshot/Search.png)
+
+### Add Employee
+![Add Employee](./screenshot/Add_Employee.png)
+
+### Update Employee
+![Update Employee](./screenshot/Update.png)
+
+### Postman - GET Request
+![Postman GET](./screenshot/Postman_Get.png)
+
+### Postman - POST Request
+![Postman POST](./screenshot/Postman_Post.png)
+
 ## Features
 
 - ✓ **Employee Listing** - View all employees in a responsive table
